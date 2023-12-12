@@ -2,12 +2,12 @@
 
 class Program
 {
-    enum Direction
+    internal enum Direction
     {
         N, E, S, W, None
     }
 
-    static readonly Dictionary<char, Tuple<Direction, Direction>> pipes = new Dictionary<char, Tuple<Direction, Direction>>
+    public static readonly Dictionary<char, Tuple<Direction, Direction>> Pipes = new Dictionary<char, Tuple<Direction, Direction>>
     {
         {'|', Tuple.Create(Direction.N, Direction.S)},
         {'-', Tuple.Create(Direction.E, Direction.W)},
@@ -48,21 +48,13 @@ class Program
                 visited[y][x] = depth;
                 var dirs = pipeMap[y][x];
 
-                switch (dirs.Item1)
-                {
-                    case Direction.N:
-                        next.Add(Tuple.Create(y - 1, x));
-                        break;
-                    case Direction.S:
-                        next.Add(Tuple.Create(y + 1, x));
-                        break;
-                    case Direction.E:
-                        next.Add(Tuple.Create(y, x + 1));
-                        break;
-                    case Direction.W:
-                        next.Add(Tuple.Create(y, x - 1));
-                        break;
-                }
+                if (dirs.Item1 == Direction.N)
+                    next.Add(Tuple.Create(y - 1, x));
+                else if (dirs.Item1 == Direction.S)
+                    next.Add(Tuple.Create(y + 1, x));
+                else if (dirs.Item1 == Direction.E)
+                    next.Add(Tuple.Create(y, x + 1));
+                else if (dirs.Item1 == Direction.W) next.Add(Tuple.Create(y, x - 1));
 
                 switch (dirs.Item2)
                 {
@@ -78,6 +70,10 @@ class Program
                     case Direction.W:
                         next.Add(Tuple.Create(y, x - 1));
                         break;
+                    case Direction.None:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
 
@@ -106,7 +102,7 @@ class Program
         return deepest;
     }
 
-    static int Part2(List<List<Tuple<Direction, Direction>>> pipeMap, List<List<int>> visited)
+    public static int Part2(List<List<Tuple<Direction, Direction>>> pipeMap, IReadOnlyList<List<int>> visited)
     {
         var area = new List<List<bool>>();
         area.Capacity = pipeMap.Count;
@@ -116,12 +112,12 @@ class Program
             area.Add(Enumerable.Repeat(false, pipeMap[y].Count).ToList());
         }
 
-        for (int row = 0; row < pipeMap.Count; row++)
+        for (var row = 0; row < pipeMap.Count; row++)
         {
-            bool inside = false;
+            var inside = false;
             var lastCorner = Tuple.Create(Direction.None, Direction.None);
 
-            for (int col = 0; col < pipeMap[row].Count; col++)
+            for (var col = 0; col < pipeMap[row].Count; col++)
             {
                 if (visited[row][col] == -1)
                 {
@@ -131,19 +127,19 @@ class Program
                 {
                     var tile = pipeMap[row][col];
 
-                    if (tile.Equals(pipes['|']))
+                    if (tile.Equals(Pipes['|']))
                     {
                         inside = !inside;
                     }
-                    else if (tile.Equals(pipes['L']) || tile.Equals(pipes['F']))
+                    else if (tile.Equals(Pipes['L']) || tile.Equals(Pipes['F']))
                     {
                         lastCorner = tile;
                     }
-                    else if (tile.Equals(pipes['J']) && lastCorner.Equals(pipes['F']))
+                    else if (tile.Equals(Pipes['J']) && lastCorner.Equals(Pipes['F']))
                     {
                         inside = !inside;
                     }
-                    else if (tile.Equals(pipes['7']) && lastCorner.Equals(pipes['L']))
+                    else if (tile.Equals(Pipes['7']) && lastCorner.Equals(Pipes['L']))
                     {
                         inside = !inside;
                     }
@@ -151,7 +147,7 @@ class Program
             }
         }
 
-        int count = 0;
+        var count = 0;
 
         for (int row = 0; row < pipeMap.Count; row++)
         {
@@ -178,20 +174,21 @@ class Program
             var line = input.ReadLine();
             pipeMap.Add(new List<Tuple<Direction, Direction>>());
 
-            for (int x = 0; x < line.Length; x++)
-            {
-                if (line[x] == 'S')
+            if (line != null)
+                for (var x = 0; x < line.Length; x++)
                 {
-                    startX = x;
-                    startY = y;
+                    if (line[x] == 'S')
+                    {
+                        startX = x;
+                        startY = y;
 
-                    pipeMap[pipeMap.Count - 1].Add(pipes['.']);
+                        pipeMap[^1].Add(Pipes['.']);
+                    }
+                    else
+                    {
+                        pipeMap[^1].Add(Pipes[line[x]]);
+                    }
                 }
-                else
-                {
-                    pipeMap[pipeMap.Count - 1].Add(pipes[line[x]]);
-                }
-            }
 
             y++;
         }
