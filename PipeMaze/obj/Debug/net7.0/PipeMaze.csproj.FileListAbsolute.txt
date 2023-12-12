@@ -1,0 +1,14 @@
+C:\testutvikling\PipeMaze\PipeMaze\bin\Debug\net7.0\PipeMaze.exe
+C:\testutvikling\PipeMaze\PipeMaze\bin\Debug\net7.0\PipeMaze.deps.json
+C:\testutvikling\PipeMaze\PipeMaze\bin\Debug\net7.0\PipeMaze.runtimeconfig.json
+C:\testutvikling\PipeMaze\PipeMaze\bin\Debug\net7.0\PipeMaze.dll
+C:\testutvikling\PipeMaze\PipeMaze\bin\Debug\net7.0\PipeMaze.pdb
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\PipeMaze.GeneratedMSBuildEditorConfig.editorconfig
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\PipeMaze.AssemblyInfoInputs.cache
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\PipeMaze.AssemblyInfo.cs
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\PipeMaze.csproj.CoreCompileInputs.cache
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\PipeMaze.dll
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\refint\PipeMaze.dll
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\PipeMaze.pdb
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\PipeMaze.genruntimeconfig.cache
+C:\testutvikling\PipeMaze\PipeMaze\obj\Debug\net7.0\ref\PipeMaze.dll
